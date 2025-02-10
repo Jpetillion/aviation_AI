@@ -16,3 +16,15 @@
 
 ## planning
 [GANTT chart](https://docs.google.com/spreadsheets/d/1Xz3UcsKheMnLBxPb7cIgCECvu0LNfSPh-nyv5ipezY4/edit?usp=sharing)
+
+## npm dependencies
+### basis
+- express: webserver
+- langraph (npm install @langchain/langgraph-cli): AI-graph framework
+- mongodb: MongoDB driver
+- dotenv: safe handling of sensitive data
+- node-cron: repetitive task automation (for reporting)
+### admin dashboarding with react
+- npx create-react-app admin-dashboard
+- axios 
+- react-router-dom
