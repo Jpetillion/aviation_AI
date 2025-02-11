@@ -1,4 +1,3 @@
-![GitHub Badge](https://img.shields.io/badge/github-181717?logo=github&logoColor=white)
 # aviation_AI
 
 ## project description
@@ -29,3 +28,6 @@
 - npx create-react-app admin-dashboard
 - axios 
 - react-router-dom
+
+## brands I care about
+![GitHub Badge](https://img.shields.io/badge/github-181717?logo=lada&logoColor=white)
