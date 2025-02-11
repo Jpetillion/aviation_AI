@@ -3,7 +3,7 @@ let apiKey = "";
 
 const now = new Date();
 const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDay() -25);
-const endDate = new Date(now.getFullYear(), now.getMonth(), now.getDay() + 1);
+const endDate = new Date(now.getFullYear(), now.getMonth(), now.getDay() + 25);
 
 // 🔹 Haal API-config op bij het laden van de pagina
 async function fetchApiConfig() {
@@ -28,7 +28,7 @@ async function getData() {
     }
 
     try {
-        const response = await fetch("http://localhost:3000/api/get-events", {
+        const response = await fetch("http://localhost:3000/api/get-all-events", {
             method: "POST",
             body: JSON.stringify({
                 timezone: "Europe/Brussels",
@@ -72,10 +72,29 @@ function displayData(data) {
     eventList.innerHTML = "";
     data.data.forEach(event => {
         const li = document.createElement("li");
-        li.textContent = event.title || "Geen titel";
+    
+        // Zet starttijd om naar een leesbaar formaat
+        const startDate = event.start ? new Date(event.start) : null;
+        const formattedStart = startDate ? startDate.toLocaleString("nl-NL", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        }) : "Geen startdatum";
+    
+        // Haal uitgenodigde gebruikers op
+        const invitedUsers = event.record?.invitedUsers?.includedUsers || [];
+        const invitedText = invitedUsers.length > 0 ? invitedUsers.join(", ") : "Geen uitgenodigde gebruikers";
+    
+        li.innerHTML = `
+            <p><strong>${event.title || "Geen titel"}</strong></p>
+            <p><strong>Start:</strong> ${formattedStart}</p>
+            <p><strong>Uitgenodigde gebruikers:</strong> ${invitedText}</p>
+        `;
+    
         eventList.appendChild(li);
-    });
+    });    
 };
 
-// 🚀 Start het ophalen van de API-config zodra de pagina geladen is
 fetchApiConfig();

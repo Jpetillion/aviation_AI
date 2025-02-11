@@ -18,7 +18,7 @@ app.get('/api/config', (req, res) => {
 });
 
 // 🔹 Proxy endpoint om data van externe API op te halen
-app.post('/api/get-events', async (req, res) => {
+app.post('/api/get-all-events', async (req, res) => {
     try {
       console.log("🔑 Verstuurde API-key naar externe API:", process.env.API_KEY);
       console.log("📡 Verstuurde body naar API:", JSON.stringify(req.body, null, 2));
