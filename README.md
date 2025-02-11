@@ -1,3 +1,4 @@
+![GitHub Badge](https://img.shields.io/badge/github-181717?logo=github&logoColor=white)
 # aviation_AI
 
 ## project description
