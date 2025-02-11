@@ -30,4 +30,4 @@
 - react-router-dom
 
 ## brands I care about
-![GitHub Badge](https://img.shields.io/badge/lada-yellow?logo=lada&logoColor=white&style=for-the-badge)
+[![Lada Badge](https://img.shields.io/badge/lada-yellow?logo=lada&logoColor=white&style=flat)](https://www.ladarymco.com/)
