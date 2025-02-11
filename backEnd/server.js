@@ -12,8 +12,8 @@ app.use(express.json());
 // 🔹 Endpoint om API-instellingen op te halen
 app.get('/api/config', (req, res) => {
   res.json({
-    apiUrl: process.env.API_URL, // Geeft de API-URL door
-    apiKey: process.env.API_KEY  // Geeft de API-key door
+    apiUrl: process.env.API_URL, 
+    apiKey: process.env.API_KEY  
   });
 });
 
@@ -26,7 +26,7 @@ app.post('/api/get-all-events', async (req, res) => {
       const response = await axios.post(process.env.API_URL, req.body, {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": process.env.API_KEY // Let op: GEEN "Bearer " gebruiken!
+          "Authorization": process.env.API_KEY 
         }
       });
   
