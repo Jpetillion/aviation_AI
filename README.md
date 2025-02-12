@@ -17,6 +17,19 @@ To assess whether a student is performing well, moderately, or is at risk of fai
 - **Progress Milestones**: Completion status of key training milestones or modules
 - **Instructor Feedback**: Qualitative assessments and comments from instructors
 - **Flight Hours Logged**: Number of flight hours completed versus the required hours
+
+To predict whether a student is "good," "average," or in the "danger zone," we look at:
+
+| Category                      | Data Points                                      | Source Endpoint                      |
+|--------------------------------|-------------------------------------------------|--------------------------------------|
+| 📅 **Attendance & Training Data** | Number of scheduled trainings, student attendance | `api/planned-training-events`      |
+| ✈️ **Flight Experience**        | Number of flight hours, types of flights         | `api/flight-plans`                  |
+| 🏆 **Assessment Scores**        | Practical and theoretical grades                 | `api/grading/grading-sheet`         |
+| 🗣️ **Instructor Feedback**       | Qualitative evaluations from instructors        | `api/grading/grading-sheet`         |
+| 🔥 **Training Completion**      | Percentage of completed modules                  | `api/training-syllabuses`           |
+
+We will first log these data points in the console and then display them in the frontend.
+
 ### implementation
 In current scope we decided to build a stand alone nodeJS server application, which takes Aviatize API data, and displays onto and interacts with frontend forms and dashboards.
 - **Define the Workflow**: Outline the steps required to process the data, apply AI models, and generate performance assessments.
