@@ -1,20 +1,30 @@
 let apiUrl = "";
 let apiKey = "";
 
+console.log("✅ script.js is geladen!");
+
 const now = new Date();
 const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDay() -25);
 const endDate = new Date(now.getFullYear(), now.getMonth(), now.getDay() + 25);
 
 // 🔹 Haal API-config op bij het laden van de pagina
 async function fetchApiConfig() {
+    console.log("🔄 fetchApiConfig() gestart...");
     try {
         const response = await fetch("http://localhost:3000/api/config");
+
+        if (!response.ok) {
+            throw new Error(`Server gaf fout: ${response.status} ${response.statusText}`);
+        }
+
         const config = await response.json();
+        console.log("✅ API-config geladen:", config);
 
         apiUrl = config.apiUrl;
-        apiKey = config.apiKey; 
-        console.log("✅ API-config geladen:", apiUrl, "🔑: ", apiKey);
-        getData(); 
+        apiKey = config.apiKey;
+
+        console.log("🔄 Start getData()...");
+        getData();
     } catch (error) {
         console.error("❌ Fout bij ophalen API-config:", error);
     }
@@ -22,34 +32,41 @@ async function fetchApiConfig() {
 
 // 🔹 Haal data op van de externe API via de backend
 async function getData() {
+    console.log("🔄 getData() gestart...");
     if (!apiUrl || !apiKey) {
         console.error("❌ API-config niet geladen, stop met uitvoeren.");
         return;
     }
 
+    console.log("📡 API request naar:", "http://localhost:3000/api/events");
+    console.log("🔑 API-key:", apiKey);
+    console.log("📅 Startdatum:", startDate.toISOString(), "Einddatum:", endDate.toISOString());
+
     try {
-        const response = await fetch("http://localhost:3000/api/get-all-events", {
+        const response = await fetch("http://localhost:3000/api/events", { 
             method: "POST",
             body: JSON.stringify({
                 timezone: "Europe/Brussels",
                 filter: {
-                    // aircrafts: ["9ocZSp6HGYCLqYZ2Y"],
-                    // users: ["ugerxfAebbvLbBcF9"],
-                    // recordtypes: [1],
                     inDateRange: {
                         startDate: startDate.toISOString(),
                         endDate: endDate.toISOString(),
-                    },
-                },
+                    }
+                }
             }),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": apiKey, 
+                "Authorization": apiKey
             },
         });
 
+        if (!response.ok) {
+            throw new Error(`Server gaf fout: ${response.status} ${response.statusText}`);
+        }
+
         const data = await response.json();
         console.log("✅ Data ontvangen:", JSON.stringify(data, null, 2));
+
         displayData(data);
     } catch (error) {
         console.error("❌ Fout bij ophalen data:", error);
@@ -98,3 +115,51 @@ function displayData(data) {
 };
 
 fetchApiConfig();
+
+async function fetchFlightPlans() {
+    console.log("📡 Flight Plans ophalen...");
+    
+    try {
+        const response = await fetch('http://localhost:3000/api/flight-plans', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": apiKey
+            },
+            body: JSON.stringify({}) // Leeg object als er geen data nodig is
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+        const data = await response.json();
+        console.log("✅ Flight Plans opgehaald:", data);
+        displayFlightPlans(data);
+    } catch (error) {
+        console.error("❌ Fout bij ophalen Flight Plans:", error);
+    }
+}
+
+function displayFlightPlans(data) {
+    const flightPlanList = document.getElementById("flightPlans");
+    
+    if (!flightPlanList) {
+        console.error("❌ Element met id 'flightPlans' niet gevonden!");
+        return;
+    }
+
+    flightPlanList.innerHTML = ""; // Leegmaken voor nieuwe data
+
+    if (!data || data.length === 0) {
+        flightPlanList.innerHTML = "<li>Geen Flight Plans gevonden.</li>";
+        return;
+    }
+
+    data.forEach(plan => {
+        const li = document.createElement("li");
+        li.textContent = `📅 ${plan.date} | ✈️ ${plan.aircraft} | 👨‍✈️ ${plan.student}`;
+        flightPlanList.appendChild(li);
+    });
+}
+
+// 🚀 Laad de Flight Plans bij het openen van de pagina
+fetchFlightPlans();

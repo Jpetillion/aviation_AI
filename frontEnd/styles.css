@@ -1,0 +1,84 @@
+:root {
+    --accent: #D85937;
+    --primary: #252552;
+    --secondary: #D7E4EC; 
+    --gray: #B2B7BF;
+    --magnolia: #EFEFFA;
+    --white: #FEFEFE;
+
+    --font--title: 'Poppins', sans-serif;
+    --font--text: 'Noto Sans Math', sans-serif;
+
+    --size--title: 3rem;
+    --size--subtitle: 2rem;
+    --size--text: .9rem;
+
+    --weight--light: 300;
+    --weight--regular: 400;
+    --weight--medium: 500;
+    --weight--bold: 700;
+
+    --spacing--large: 1.5rem;
+    --spacing--medium: 1rem;
+    --spacing--small: .5rem;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+section {
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-item {
+    background: #fff;
+    border-left: 5px solid #68ccca;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.event-item p {
+    margin: 5px 0;
+}
+
+.flight-plan-item, .grading-sheet-item {
+    background: white;
+    border-left: 5px solid #68bc00;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.flight-plan-item p, .grading-sheet-item p {
+    margin: 5px 0;
+}
+
+.event-item, .flight-plan-item, .grading-sheet-item {
+    background: white;
+    border-left: 5px solid #68bc00;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.event-item p, .flight-plan-item p, .grading-sheet-item p {
+    margin: 5px 0;
+}
+
