@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 25);
 
     const eventData = await fetchEvents(config.apiKey, startDate, endDate);
+    console.log("📡 Ontvangen Events data:", eventData); 
     if (eventData?.data) displayEvents(eventData.data);
 
     // ✈️ Haal Flight Plans op
